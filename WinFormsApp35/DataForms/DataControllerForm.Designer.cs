@@ -155,10 +155,10 @@
             // 
             // showDataButton
             // 
-            this.showDataButton.BackColor = System.Drawing.Color.SteelBlue;
-            this.showDataButton.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.showDataButton.BackColor = System.Drawing.Color.Green;
+            this.showDataButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.showDataButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.showDataButton.Location = new System.Drawing.Point(2, 13);
+            this.showDataButton.Location = new System.Drawing.Point(3, 13);
             this.showDataButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.showDataButton.Name = "showDataButton";
             this.showDataButton.Size = new System.Drawing.Size(89, 36);
@@ -172,7 +172,7 @@
             this.button4.BackColor = System.Drawing.Color.SteelBlue;
             this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button4.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button4.Location = new System.Drawing.Point(198, 14);
+            this.button4.Location = new System.Drawing.Point(301, 12);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 36);
@@ -183,8 +183,9 @@
             // insertButton
             // 
             this.insertButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.insertButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.insertButton.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.insertButton.Location = new System.Drawing.Point(290, 15);
+            this.insertButton.Location = new System.Drawing.Point(209, 13);
             this.insertButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.insertButton.Name = "insertButton";
             this.insertButton.Size = new System.Drawing.Size(86, 36);
@@ -195,9 +196,10 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.SteelBlue;
+            this.button3.BackColor = System.Drawing.Color.Red;
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button3.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button3.Location = new System.Drawing.Point(436, 14);
+            this.button3.Location = new System.Drawing.Point(436, 12);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(87, 38);
@@ -208,9 +210,9 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.SteelBlue;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button1.Location = new System.Drawing.Point(97, 13);
+            this.button1.Location = new System.Drawing.Point(98, 13);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 36);
