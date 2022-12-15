@@ -60,34 +60,12 @@ namespace WinFormsApp35.DataForms
         {
             selectedTableName = tableSelectorCombobox.Text;
             ShowDataEntryForm();
+            dataGridView1.DataSource = null;
         }
 
         private void ShowDataEntryForm() {
-            switch (selectedTableName) {
-                case "Patient":
-                    dataEntryForm = new PatientForm(connection);
-                    break;
-                case "Medicine":
-                    dataEntryForm = new MedicineForm(connection);
-                    break;
-                case "Orders":
-                    dataEntryForm = new defaultForm();
-                    ShowData();
-                    break;
-                case "Branch":
-                    dataEntryForm = new BranchForm(connection);
-                    break;
-                case "Med_Exist":
-                    dataEntryForm = new Med_Exist(connection);
-                    break;
-                case "Manufacturer":
-                    dataEntryForm = new ManufacturerForm(connection);
-                    break;
+            dataEntryForm = DataFormFactory.createDataForm(selectedTableName,connection);
 
-                default:
-                    dataEntryForm = new defaultForm();
-                    break;
-            }
             dataEntryPanel.Controls.Clear();
             dataEntryForm.FormBorderStyle = FormBorderStyle.None;
             dataEntryForm.TopLevel = false;
