@@ -4,12 +4,13 @@ using System.Data.SqlClient;
 using System.Text;
 using WinFormsApp35.DataForms;
 using WinFormsApp35.Tables;
-namespace WinFormsApp35
+
+namespace WinFormsApp35.Utilities
 {
 
     public static class DataFormFactory
     {
-        public static DataForm createDataForm(String formName, SqlConnection connection)
+        public static DataForm createDataForm(string formName, SqlConnection connection)
         {
             switch (formName)
             {

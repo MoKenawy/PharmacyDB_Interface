@@ -178,7 +178,8 @@
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.SteelBlue;
+            this.button4.BackColor = System.Drawing.Color.LightGray;
+            this.button4.Enabled = false;
             this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button4.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.button4.Location = new System.Drawing.Point(301, 12);
@@ -218,7 +219,8 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.BackColor = System.Drawing.Color.LightGray;
+            this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.button1.Location = new System.Drawing.Point(108, 13);
@@ -238,7 +240,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "DataControllerForm";
             this.Text = "DataControllerForm";
-            this.Load += new System.EventHandler(this.DataControllerForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

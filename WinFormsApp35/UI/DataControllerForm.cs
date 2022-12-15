@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,13 +8,14 @@ using System.Drawing;
 using System.Linq.Expressions;
 using System.Text;
 using System.Windows.Forms;
+using WinFormsApp35.Utilities;
 
 namespace WinFormsApp35.DataForms
 {
     public partial class DataControllerForm : Form
     {
         SqlConnection connection;
-        string selectedTableName;
+        string selectedTableName = "";
         Tables.DataForm dataEntryForm;
         public DataControllerForm(SqlConnection connection)
         {
@@ -21,21 +23,43 @@ namespace WinFormsApp35.DataForms
             this.connection = connection;
         }
 
-        private void DataControllerForm_Load(object sender, EventArgs e)
+        private void tableSelectorCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            selectedTableName = tableSelectorCombobox.Text;
+            ShowDataEntryForm();
+            dataGridView1.DataSource = null;
         }
 
+        private void ShowDataEntryForm()
+        {
+            dataEntryForm = DataFormFactory.createDataForm(selectedTableName, connection);
+
+            dataEntryPanel.Controls.Clear();
+            dataEntryForm.FormBorderStyle = FormBorderStyle.None;
+            dataEntryForm.TopLevel = false;
+            dataEntryPanel.Controls.Add(dataEntryForm);
+            dataEntryForm.Dock = DockStyle.Fill;
+            dataEntryForm.Show();
+        }
+        private bool ValidateTableSelector()
+        {
+            if (selectedTableName != "")
+                return true;
+            else
+            {
+                MessageBox.Show("Please choose a table");
+                return false;
+            }
+        }
         private void showDataButton_Click(object sender, EventArgs e)
         {
-            ShowData();
+            if (ValidateTableSelector())
+                ShowData();
         }
         private void ShowData() {
             string query = "Select * from " + selectedTableName;
-            if (selectedTableName != null || selectedTableName != "")
-            {
-                dataGridView1.DataSource = loadTable(query);
-            }
+            dataGridView1.DataSource = loadTable(query);
+
         }
         private DataTable loadTable(string query)
         {
@@ -56,38 +80,26 @@ namespace WinFormsApp35.DataForms
             }
         }
 
-        private void tableSelectorCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        private void InsertData()
         {
-            selectedTableName = tableSelectorCombobox.Text;
-            ShowDataEntryForm();
-            dataGridView1.DataSource = null;
-        }
-
-        private void ShowDataEntryForm() {
-            dataEntryForm = DataFormFactory.createDataForm(selectedTableName,connection);
-
-            dataEntryPanel.Controls.Clear();
-            dataEntryForm.FormBorderStyle = FormBorderStyle.None;
-            dataEntryForm.TopLevel = false;
-            dataEntryPanel.Controls.Add(dataEntryForm);
-            dataEntryForm.Dock = DockStyle.Fill;
-            dataEntryForm.Show();
-        }
-
-        private void InsertData() {
-            try{
+            try
+            {
                 dataEntryForm.Insert();
             }
-            catch (SqlException exception){
+            catch (SqlException exception)
+            {
                 MessageBox.Show(exception.Message);
             }
         }
 
         private void insertButton_Click(object sender, EventArgs e)
         {
-            InsertData();
-            ShowData();
-            
+            if (ValidateTableSelector())
+            {
+                InsertData();
+                ShowData();
+            }
         }
+
     }
 }
