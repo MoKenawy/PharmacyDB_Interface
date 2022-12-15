@@ -14,6 +14,7 @@ namespace WinFormsApp35
     public partial class PatientForm : DataForm
     {
         SqlConnection connection;
+        string query;
         public PatientForm(SqlConnection connection)
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace WinFormsApp35
         public override void Insert()
         {
             connection.Open();
-            string query = "INSERT INTO Patient Values(@name,@address)";
+            query = "INSERT INTO Patient Values(@name,@address)";
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@name", nameTextBox.Text);
             command.Parameters.AddWithValue("@address", addressTextBox.Text);
@@ -38,9 +39,18 @@ namespace WinFormsApp35
         }
 
 
-        public override void Update(int index)
+        public override void Update(int id, List<object> record)
         {
-            throw new NotImplementedException();
+            int index = 0;
+            connection.Open();
+            query = "UPDATE Patient " +
+                "SET patient_name = @name, patient_address = @address " +
+                "WHERE patient_ID = "+ record[index++];    
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@address", record[index++]);
+            command.Parameters.AddWithValue("@name", record[index++]);
+            command.ExecuteNonQueryAsync();
+            connection.Close();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

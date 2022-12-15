@@ -39,7 +39,7 @@
             this.dataEntryPanel = new System.Windows.Forms.Panel();
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.showDataButton = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.updateButton = new System.Windows.Forms.Button();
             this.insertButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -112,6 +112,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -152,7 +154,7 @@
             // 
             this.controlsPanel.BackColor = System.Drawing.SystemColors.Control;
             this.controlsPanel.Controls.Add(this.showDataButton);
-            this.controlsPanel.Controls.Add(this.button4);
+            this.controlsPanel.Controls.Add(this.updateButton);
             this.controlsPanel.Controls.Add(this.insertButton);
             this.controlsPanel.Controls.Add(this.button3);
             this.controlsPanel.Controls.Add(this.button1);
@@ -176,19 +178,19 @@
             this.showDataButton.UseVisualStyleBackColor = false;
             this.showDataButton.Click += new System.EventHandler(this.showDataButton_Click);
             // 
-            // button4
+            // updateButton
             // 
-            this.button4.BackColor = System.Drawing.Color.LightGray;
-            this.button4.Enabled = false;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button4.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button4.Location = new System.Drawing.Point(301, 12);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(86, 36);
-            this.button4.TabIndex = 30;
-            this.button4.Text = "Update";
-            this.button4.UseVisualStyleBackColor = false;
+            this.updateButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.updateButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.updateButton.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.updateButton.Location = new System.Drawing.Point(301, 12);
+            this.updateButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(86, 36);
+            this.updateButton.TabIndex = 30;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = false;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // insertButton
             // 
@@ -261,7 +263,7 @@
         private System.Windows.Forms.Panel controlsPanel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox tableSelectorCombobox;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button insertButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;

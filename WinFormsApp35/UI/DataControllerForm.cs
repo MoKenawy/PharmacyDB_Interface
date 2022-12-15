@@ -100,6 +100,52 @@ namespace WinFormsApp35.DataForms
                 ShowData();
             }
         }
+        
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            UpdateRecord();
+        }
+
+        private void UpdateRecord()
+        {
+            //TO DO
+            //Change the Update mechanism By using dataAdapter Update
+            List<object> record = getSelectedRecord();
+            if (record != null)
+            {
+                try
+                {
+                    int id = (int)record[0];
+
+                    dataEntryForm.Update(id, record);
+                }
+                catch (SqlException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please Select a Row for Change");
+            }
+
+        }
+        private List<object> getSelectedRecord() {
+            List<object> record = null;
+            try {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                record = new List<object>();
+                for (int i = 0; i < selectedRow.Cells.Count; i++)
+                {
+                    record.Add(selectedRow.Cells[i].Value);
+                }
+            }
+            catch (IndexOutOfRangeException exception) {
+                throw new IndexOutOfRangeException(exception.Message);
+            }
+
+            return record;
+        }
 
     }
 }

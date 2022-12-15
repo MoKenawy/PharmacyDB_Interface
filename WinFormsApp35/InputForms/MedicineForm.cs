@@ -37,9 +37,9 @@ namespace WinFormsApp35
             connection.Close();
         }
 
-        public override void Update(int index)
+        public override void Update(int index,List<object> record)
         {
-            base.Update(index);
+            base.Update(index, record);
         }
 
         private void Form2_Load(object sender, EventArgs e)
