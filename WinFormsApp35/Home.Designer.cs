@@ -72,7 +72,7 @@
             this.ClientSize = new System.Drawing.Size(1013, 608);
             this.Controls.Add(this.MainPanel);
             this.Name = "Home";
-            this.Text = "Home";
+            this.Text = "PharmacyDB Manager";
             this.Load += new System.EventHandler(this.Home_Load);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
