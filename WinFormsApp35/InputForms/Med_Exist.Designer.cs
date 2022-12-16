@@ -33,6 +33,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.expiryDateTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -98,21 +99,33 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox2.Size = new System.Drawing.Size(425, 202);
+            this.groupBox2.Size = new System.Drawing.Size(425, 217);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Existing Medicine Info";
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.label2);
             this.panel6.Controls.Add(this.expiryDateTextBox);
             this.panel6.Controls.Add(this.label9);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(5, 153);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(10);
-            this.panel6.Size = new System.Drawing.Size(415, 44);
+            this.panel6.Size = new System.Drawing.Size(415, 59);
             this.panel6.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 15);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "(Year-Month-Day)";
             // 
             // expiryDateTextBox
             // 
@@ -125,13 +138,13 @@
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label9.Location = new System.Drawing.Point(10, 10);
             this.label9.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(88, 21);
+            this.label9.Size = new System.Drawing.Size(88, 36);
             this.label9.TabIndex = 3;
             this.label9.Text = "Expiry Date";
             // 
@@ -275,5 +288,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox medIDTextBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
     }
 }

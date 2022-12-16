@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using WinFormsApp35.Tables;
+using WinFormsApp35.Utilities;
+
 namespace WinFormsApp35.DataForms
 {
     public partial class BranchForm : DataForm
@@ -15,14 +17,28 @@ namespace WinFormsApp35.DataForms
         SqlConnection connection;
         string query;
         string idName = "branch_ID";
+        TextBoxValidator textBoxValidator;
         public BranchForm(SqlConnection connection)
         {
             InitializeComponent();
             this.connection = connection;
         }
 
+        private bool IsValid() {
+            if (addressTextBox.Text != "")
+                return true;
+            else
+                return false;
+
+        }
+
         public override bool Insert()
         {
+            if (!IsValid())
+            {
+                MessageBox.Show("Address Field required. Please Enter the address");
+                return false;
+            }
             try { 
             connection.Open();
             string query = "INSERT INTO Branch Values(@address)";
