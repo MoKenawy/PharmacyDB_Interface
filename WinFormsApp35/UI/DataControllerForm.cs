@@ -18,10 +18,13 @@ namespace WinFormsApp35.DataForms
         string selectedTableName = "";
         Tables.DataForm dataEntryForm;
         SqlDataAdapter dataAdapter;
+
+        DataControllerUtil controllerUtil;
         public DataControllerForm(SqlConnection connection)
         {
             InitializeComponent();
             this.connection = connection;
+            controllerUtil = new DataControllerUtil(connection, dataEntryForm);
         }
 
         private void tableSelectorCombobox_SelectedIndexChanged(object sender, EventArgs e)
@@ -29,6 +32,8 @@ namespace WinFormsApp35.DataForms
             selectedTableName = tableSelectorCombobox.Text;
             ShowDataEntryForm();
             dataGridView1.DataSource = null;
+
+            controllerUtil.dataEntryForm = dataEntryForm;
         }
 
         private void ShowDataEntryForm()
@@ -59,83 +64,27 @@ namespace WinFormsApp35.DataForms
         }
         private void ShowData() {
             string query = "Select * from " + selectedTableName;
-            dataGridView1.DataSource = loadTable(query);
 
+            dataGridView1.DataSource = controllerUtil.loadTable(query);
         }
-        private DataTable loadTable(string query)
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                dataAdapter = new SqlDataAdapter(command);
-                connection.Close();
-                dataAdapter.Fill(dt);
-                return dt;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return null;
-            }
-        }
-
-        private void InsertData()
-        {
-            try
-            {
-                dataEntryForm.Insert();
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-        }
-
         private void insertButton_Click(object sender, EventArgs e)
         {
             if (ValidateTableSelector())
             {
-                InsertData();
+                controllerUtil.InsertData();
                 ShowData();
             }
         }
         
         private void updateButton_Click(object sender, EventArgs e)
         {
-            if (UpdateRecord())
+            List<object> record = getSelectedRecord();
+            if (controllerUtil.UpdateRecord(record))
             {
                 ShowData();
             }
         }
 
-        private bool UpdateRecord()
-        {
-            //TO DO
-            //Change the Update mechanism By using dataAdapter Update
-            List<object> record = getSelectedRecord();
-            bool isUpdated = false;
-            if (record != null)
-            {
-                try
-                {
-                    int id = (int)record[0];
-                    isUpdated = dataEntryForm.Update(record);
-                }
-                catch (SqlException exception)
-                {
-                    MessageBox.Show(exception.Message);
-                    isUpdated = false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please Select a Row for Change");
-                isUpdated = false;
-            }
-            return isUpdated;
-        }
         private List<object> getSelectedRecord() {
             List<object> record = null;
             try {
@@ -171,22 +120,13 @@ namespace WinFormsApp35.DataForms
             if (DeleteRecordDialog())
             {
                 List<object> record = getSelectedRecord();
-                if (TryDeleteRecord(record))
+                if (controllerUtil.TryDeleteRecord(record))
                 {
                     ShowData();
                 }
             }
         }
-        private bool TryDeleteRecord(List<object> record) {
-            if (dataEntryForm.Delete(record) == true)
-                return true;
 
-            else {
-                MessageBox.Show("Deletion Failed ,Please try again");
-                return false;
-            }
-
-        }
         private bool DeleteRecordDialog() {
             string message = "Are you sure?";
             string title = "Delete Record";
