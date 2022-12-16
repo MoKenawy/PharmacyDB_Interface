@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tableSelectorCombobox = new System.Windows.Forms.ComboBox();
@@ -41,8 +41,8 @@
             this.showDataButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.insertButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.dataShowPanel.SuspendLayout();
@@ -116,14 +116,14 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -156,8 +156,8 @@
             this.controlsPanel.Controls.Add(this.showDataButton);
             this.controlsPanel.Controls.Add(this.updateButton);
             this.controlsPanel.Controls.Add(this.insertButton);
-            this.controlsPanel.Controls.Add(this.button3);
-            this.controlsPanel.Controls.Add(this.button1);
+            this.controlsPanel.Controls.Add(this.deleteButton);
+            this.controlsPanel.Controls.Add(this.searchButton);
             this.controlsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.controlsPanel.Location = new System.Drawing.Point(0, 554);
             this.controlsPanel.Name = "controlsPanel";
@@ -206,32 +206,33 @@
             this.insertButton.UseVisualStyleBackColor = false;
             this.insertButton.Click += new System.EventHandler(this.insertButton_Click);
             // 
-            // button3
+            // deleteButton
             // 
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button3.Location = new System.Drawing.Point(436, 12);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 38);
-            this.button3.TabIndex = 29;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = false;
+            this.deleteButton.BackColor = System.Drawing.Color.Red;
+            this.deleteButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteButton.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.deleteButton.Location = new System.Drawing.Point(436, 12);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(87, 38);
+            this.deleteButton.TabIndex = 29;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
-            // button1
+            // searchButton
             // 
-            this.button1.BackColor = System.Drawing.Color.LightGray;
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button1.Location = new System.Drawing.Point(108, 13);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 36);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = false;
+            this.searchButton.BackColor = System.Drawing.Color.SteelBlue;
+            this.searchButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchButton.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.searchButton.Location = new System.Drawing.Point(108, 13);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(95, 36);
+            this.searchButton.TabIndex = 27;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // DataControllerForm
             // 
@@ -265,8 +266,8 @@
         private System.Windows.Forms.ComboBox tableSelectorCombobox;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button insertButton;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button showDataButton;
     }

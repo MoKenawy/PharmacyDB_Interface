@@ -17,6 +17,7 @@ namespace WinFormsApp35.DataForms
         SqlConnection connection;
         string selectedTableName = "";
         Tables.DataForm dataEntryForm;
+        SqlDataAdapter dataAdapter;
         public DataControllerForm(SqlConnection connection)
         {
             InitializeComponent();
@@ -68,9 +69,9 @@ namespace WinFormsApp35.DataForms
                 DataTable dt = new DataTable();
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                dataAdapter = new SqlDataAdapter(command);
                 connection.Close();
-                adapter.Fill(dt);
+                dataAdapter.Fill(dt);
                 return dt;
             }
             catch (SqlException exception)
@@ -103,32 +104,37 @@ namespace WinFormsApp35.DataForms
         
         private void updateButton_Click(object sender, EventArgs e)
         {
-            UpdateRecord();
+            if (UpdateRecord())
+            {
+                ShowData();
+            }
         }
 
-        private void UpdateRecord()
+        private bool UpdateRecord()
         {
             //TO DO
             //Change the Update mechanism By using dataAdapter Update
             List<object> record = getSelectedRecord();
+            bool isUpdated = false;
             if (record != null)
             {
                 try
                 {
                     int id = (int)record[0];
-
-                    dataEntryForm.Update(id, record);
+                    isUpdated = dataEntryForm.Update(record);
                 }
                 catch (SqlException exception)
                 {
                     MessageBox.Show(exception.Message);
+                    isUpdated = false;
                 }
             }
             else
             {
                 MessageBox.Show("Please Select a Row for Change");
+                isUpdated = false;
             }
-
+            return isUpdated;
         }
         private List<object> getSelectedRecord() {
             List<object> record = null;
@@ -140,12 +146,60 @@ namespace WinFormsApp35.DataForms
                     record.Add(selectedRow.Cells[i].Value);
                 }
             }
-            catch (IndexOutOfRangeException exception) {
-                throw new IndexOutOfRangeException(exception.Message);
+            catch (ArgumentOutOfRangeException exception) {
+                // TO DO Must show before Deletion Dialog
+                MessageBox.Show("Please Select a Row");
             }
-
             return record;
         }
 
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = FindRecordByID();
+            
+        }
+        private DataTable FindRecordByID() {
+            DataTable dt = new DataTable();
+
+            dataAdapter = dataEntryForm.Search();
+            dataAdapter.Fill(dt);
+            return dt;
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (DeleteRecordDialog())
+            {
+                List<object> record = getSelectedRecord();
+                if (TryDeleteRecord(record))
+                {
+                    ShowData();
+                }
+            }
+        }
+        private bool TryDeleteRecord(List<object> record) {
+            if (dataEntryForm.Delete(record) == true)
+                return true;
+
+            else {
+                MessageBox.Show("Deletion Failed ,Please try again");
+                return false;
+            }
+
+        }
+        private bool DeleteRecordDialog() {
+            string message = "Are you sure?";
+            string title = "Delete Record";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
