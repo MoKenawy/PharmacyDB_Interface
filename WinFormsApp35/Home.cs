@@ -22,6 +22,16 @@ namespace WinFormsApp35.Home
 
         private void Home_Load(object sender, EventArgs e)
         {
+            if (ConnectToDB())
+            {
+                Form dataControllerForm = new WinFormsApp35.DataForms.DataControllerForm(connection);
+                MainPanel.Controls.Clear();
+                dataControllerForm.FormBorderStyle = FormBorderStyle.None;
+                dataControllerForm.TopLevel = false;
+                MainPanel.Controls.Add(dataControllerForm);
+                dataControllerForm.Dock = DockStyle.Fill;
+                dataControllerForm.Show();
+            }
         }
         private bool ConnectToDB() {
             bool isConnected = false;
@@ -45,24 +55,6 @@ namespace WinFormsApp35.Home
             return isConnected;
         }
 
-        private void ordersFormButton_Click(object sender, EventArgs e)
-        {
-            Form dataControllerForm = new WinFormsApp35.DataForms.DataControllerForm(connection);
-            dataControllerForm.Show();
-        }
 
-        private void connectButton_Click(object sender, EventArgs e)
-        {
-            if (ConnectToDB())
-            {
-                Form dataControllerForm = new WinFormsApp35.DataForms.DataControllerForm(connection);
-                MainPanel.Controls.Clear();
-                dataControllerForm.FormBorderStyle = FormBorderStyle.None;
-                dataControllerForm.TopLevel = false;
-                MainPanel.Controls.Add(dataControllerForm);
-                dataControllerForm.Dock = DockStyle.Fill;
-                dataControllerForm.Show();
-            }
-        }
     }
 }

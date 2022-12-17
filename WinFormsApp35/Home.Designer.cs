@@ -31,14 +31,12 @@
             this.MainPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.connectionStatusLabel = new System.Windows.Forms.Label();
-            this.connectButton = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.MainPanel.Controls.Add(this.connectButton);
             this.MainPanel.Controls.Add(this.label1);
             this.MainPanel.Controls.Add(this.connectionStatusLabel);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -66,16 +64,6 @@
             this.connectionStatusLabel.Size = new System.Drawing.Size(72, 15);
             this.connectionStatusLabel.TabIndex = 0;
             this.connectionStatusLabel.Text = "Connection:";
-            // 
-            // connectButton
-            // 
-            this.connectButton.Location = new System.Drawing.Point(455, 321);
-            this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(75, 23);
-            this.connectButton.TabIndex = 2;
-            this.connectButton.Text = "Connect";
-            this.connectButton.UseVisualStyleBackColor = true;
-            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // Home
             // 

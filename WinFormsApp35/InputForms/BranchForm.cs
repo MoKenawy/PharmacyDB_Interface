@@ -56,25 +56,5 @@ namespace WinFormsApp35.DataForms
             return SearchRecordByID(id);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            List<object> record = new List<object>();
-            record.Add(addressTextBox.Text);
-            base.InsertRecord(record);
-        }
-
-        private void updateRecordButton_Click(object sender, EventArgs e)
-        {
-            List<object> record = new List<object>();
-            record.Add(12);
-            record.Add(addressTextBox.Text);
-            base.UpdateRecord(record, "WHERE branch_ID = 12");
-
-        }
-
-        private void deleteRecordbutton_Click(object sender, EventArgs e)
-        {      
-            DeleteRecord("WHERE branch_ID = 12");
-        }
     }
 }
