@@ -37,7 +37,7 @@ namespace WinFormsApp35.Home
             bool isConnected = false;
                 ConnectionUtil connectionUtil = new ConnectionUtil("PharmacyDB");
 
-                    connection = connectionUtil.getConnection();
+                    connection = connectionUtil.Connect();
                 if (connection != null)
                 {
                     connection.Open();
