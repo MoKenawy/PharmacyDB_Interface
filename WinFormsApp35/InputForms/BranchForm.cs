@@ -14,14 +14,14 @@ namespace WinFormsApp35.DataForms
 {
     public partial class BranchForm : DataForm
     {
-        SqlConnection connection;
-        string query;
-        string idName = "branch_ID";
-        TextBoxValidator textBoxValidator;
-        public BranchForm(SqlConnection connection)
-        {
+        public BranchForm(SqlConnection connection): base(connection)
+        {  
             InitializeComponent();
-            this.connection = connection;
+            base.tableName = "Branch";
+            base.tableIDName.Add("branch_ID");
+            base.hasIdentityConstraint = true;
+            base.InitTableInfo();
+            
         }
 
         private bool IsValid() {
@@ -34,83 +34,47 @@ namespace WinFormsApp35.DataForms
 
         public override bool Insert()
         {
-            if (!IsValid())
-            {
-                MessageBox.Show("Address Field required. Please Enter the address");
-                return false;
-            }
-            try { 
-            connection.Open();
-            string query = "INSERT INTO Branch Values(@address)";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@address", addressTextBox.Text);
-            command.ExecuteNonQuery();
-            return true;
-
-        }
-            catch (Exception exception) {
-                return false;
-            }
-            finally {
-                connection.Close();
-            }
+            List<object> record = new List<object>();
+//            record.Add(nameTextBox.Text);
+            record.Add(addressTextBox.Text);
+            return InsertRecord(record);
         }
         public override bool Update(List<object> record)
         {
-            try
-            {
-                int index = 0;
-                connection.Open();
-                query = "UPDATE Branch " +
-                    "SET branch_address = @branch_address " +
-                    "WHERE branch_ID = " + record[index++];
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@branch_address", (string)record[index++]);
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            int id = (int)record[0];
+            return UpdateRecordByID(record, id);
         }
 
         public override bool Delete(List<object> record)
         {
-            try
-            {
-                int id = (int)record[0];
-                connection.Open();
-                query = "DELETE FROM Branch WHERE branch_ID = @id";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            int id = (int)record[0];
+            return DeleteRecordByID(id);
         }
         public override SqlDataAdapter Search()
         {
-            connection.Open();
-            query = "SELECT * FROM Branch WHERE branch_ID = @id";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@id", searchTextBox.Text);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            connection.Close();
-            return adapter;
+            int id = int.Parse(searchTextBox.Text);
+            return SearchRecordByID(id);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<object> record = new List<object>();
+            record.Add(addressTextBox.Text);
+            base.InsertRecord(record);
+        }
+
+        private void updateRecordButton_Click(object sender, EventArgs e)
+        {
+            List<object> record = new List<object>();
+            record.Add(12);
+            record.Add(addressTextBox.Text);
+            base.UpdateRecord(record, "WHERE branch_ID = 12");
+
+        }
+
+        private void deleteRecordbutton_Click(object sender, EventArgs e)
+        {      
+            DeleteRecord("WHERE branch_ID = 12");
         }
     }
 }

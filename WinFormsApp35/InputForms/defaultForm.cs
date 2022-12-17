@@ -10,9 +10,12 @@ namespace WinFormsApp35.DataForms
 {
     public partial class defaultForm : Tables.DataForm
     {
-        public defaultForm()
+        public defaultForm(): base()
         {
             InitializeComponent();
+            base.tableName = "Orders";
+            base.hasIdentityConstraint = true;
+            base.InitTableInfo();
         }
     }
 }

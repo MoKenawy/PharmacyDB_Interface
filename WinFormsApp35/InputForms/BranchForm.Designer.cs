@@ -342,5 +342,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox phoneTextBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button updateRecordButton;
+        private System.Windows.Forms.Button deleteRecordbutton;
     }
 }

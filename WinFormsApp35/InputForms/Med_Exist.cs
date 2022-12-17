@@ -14,98 +14,46 @@ namespace WinFormsApp35.DataForms
 {
     public partial class Med_Exist : DataForm
     {
-        SqlConnection connection;
-        string query;
-        
-
-        public Med_Exist(SqlConnection connection)
+        public Med_Exist(SqlConnection connection) : base(connection)
         {
             InitializeComponent();
-            this.connection = connection;
-            base.hasCompositeID = true;
+            base.tableName = "Med_Exist";
+            base.tableIDName.Add("med_ID");
+            base.tableIDName.Add("branch_ID");
+            base.hasIdentityConstraint = false;
+            base.InitTableInfo();
         }
         public override bool Insert()
         {
-            try
-            {
-                connection.Open();
-                query = "INSERT INTO Med_Exist Values(@medID, @branchID, @quantity, @expiryDate)";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@medID", medIDTextBox.Text);
-                command.Parameters.AddWithValue("@branchID", branchIDTextBox.Text);
-                command.Parameters.AddWithValue("@quantity", int.Parse(quantityTextBox.Text));
-                command.Parameters.AddWithValue("@expiryDate", expiryDateTextBox.Text);
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (SqlException exception)
-            {
-                return false;
-                MessageBox.Show(exception.Message);
-            }
-            finally {
-                connection.Close();
-            }
+            List<object> record = new List<object>();
+            record.Add(medIDTextBox.Text);
+            record.Add(branchIDTextBox.Text);
+            record.Add(quantityTextBox.Text);
+            record.Add(expiryDateTextBox.Text);
+            return InsertRecord(record);
         }
         public override bool Update(List<object> record)
         {
-            try
-            {
-                int index = 0;
-                connection.Open();
-                query = "UPDATE Med_Exist " +
-                    "SET quantity = @quantity , expiryDate = @expiryDate" +
-                    " WHERE med_ID = "+ record[index++] + " AND branch_ID = " + record[index++];
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@quantity", (int)record[index++]);
-                command.Parameters.AddWithValue("@expiryDate", record[index++]);
-                command.ExecuteNonQueryAsync();
-                return true;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            string[] compositeID = new string[2];
+            compositeID[0] = ((int)record[0]).ToString();
+            compositeID[1] = ((int)record[1]).ToString();
+            return UpdateRecordByCompositeID(record,compositeID);
+
         }
-        public override bool Delete(List<object> record)
+        public bool DeleteRecord(List<object> record)
         {
-            try
-            {
-                int medID = (int)record[0];
-                int branchID = (int)record[1];
-                connection.Open();
-                query = "DELETE FROM Med_Exist WHERE med_ID = @med_ID AND branch_ID = @branch_ID";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@med_ID", medID);
-                command.Parameters.AddWithValue("@branch_ID", branchID);
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            string[] compositeID = new string[2];
+            compositeID[0] = ((int)record[0]).ToString();
+            compositeID[1] = ((int)record[1]).ToString();
+            return DeleteRecordByCompositeID(compositeID);
         }
         public override SqlDataAdapter Search()
         {
-            connection.Open();
-            query = "SELECT * FROM Med_Exist WHERE med_ID = @med_ID AND branch_ID = @branch_ID";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@med_ID", medIDTextBox.Text);
-            command.Parameters.AddWithValue("@branch_ID", branchIDTextBox.Text);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            connection.Close();
-            return adapter;
+            string[] compositeID = new string[2];
+            compositeID[0] = medIDTextBox.Text;
+            compositeID[1] = branchIDTextBox.Text;
+
+            return SearchRecordByCompositeID(compositeID);
         }
 
     }

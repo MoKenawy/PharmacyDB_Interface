@@ -19,7 +19,7 @@ namespace WinFormsApp35.Utilities
             this.connection = connection;
             this.dataEntryForm = dataEntryForm;
         }
-        public DataTable loadTable(string query)
+/*        public DataTable loadTable(string query)
         {
             try
             {
@@ -36,6 +36,24 @@ namespace WinFormsApp35.Utilities
                 MessageBox.Show(exception.Message);
                 return null;
             }
+        }*/
+        public DataTable loadTable(string query)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dataAdapter = getAllData();
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show(exception.Message);
+                return null;
+            }
+        }
+        private SqlDataAdapter getAllData() {
+            return dataEntryForm.SelectAll();
         }
 
         public void InsertData()

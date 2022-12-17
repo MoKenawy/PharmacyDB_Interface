@@ -7,7 +7,7 @@ namespace WinFormsApp35.Utilities
 {
     internal class ConnectionUtil
     {
-        const string SERVER_NAME = "LAPTOP-IH3NAIAC";
+        const string SERVER_NAME = "LAPTOP-IH3NAIss";
         string connectionURL;
         private SqlConnection connection;
         public SqlConnection getConnection() {
@@ -19,13 +19,22 @@ namespace WinFormsApp35.Utilities
                          + "Integrated Security = True;";
         }
         public SqlConnection Connect() {
-            try {     
-                connection = new SqlConnection(connectionURL);
-            }
-            catch (SqlException exception) {
-                Console.Error.WriteLine(exception.Message);
-            }
+            connection = new SqlConnection(connectionURL);
             return connection;
+        }
+
+        public bool TryConnect()
+        {
+            try
+            {
+                connection = new SqlConnection(connectionURL);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }
+
         }
     }
 }

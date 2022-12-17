@@ -16,100 +16,39 @@ namespace WinFormsApp35
     {
         SqlConnection connection;
         string query;
-        public MedicineForm(SqlConnection connection)
+        public MedicineForm(SqlConnection connection) : base(connection)
         {
             InitializeComponent();
-            this.connection = connection;
+            base.tableName = "Medicine";
+            base.hasIdentityConstraint = true;
+            base.tableIDName.Add("med_ID");
+            base.InitTableInfo();
         }
 
         public override bool Delete(List<object> record)
         {
-            try
-            {
-                int id = (int)record[0];
-                connection.Open();
-                query = "DELETE FROM Medicine WHERE med_ID = @id";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            int id = (int)record[0];
+            return DeleteRecordByID(id);
         }
 
         public override bool Insert()
         {
-            try { 
-            connection.Open();
-            query = "INSERT INTO Medicine Values(@genericName,@brandName,@price)";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@genericName", genericNameTextBox.Text);
-            command.Parameters.AddWithValue("@brandName", brandNameTextBox.Text);
-                command.Parameters.Add("@price", SqlDbType.Decimal, 18);
-
-                command.Parameters["@price"].Precision = 5;
-                command.Parameters["@price"].Scale = 2;
-                command.Parameters["@price"].Value = decimal.Parse(priceTextBox.Text);
-                command.ExecuteNonQuery();
-            return true;
-
-        }
-            catch (Exception exception) {
-                return false;
-            }
-            finally {
-                connection.Close();
-            }
+            List<object> record = new List<object>();
+            record.Add(genericNameTextBox.Text);
+            record.Add(brandNameTextBox.Text);
+            record.Add(priceTextBox.Text);
+            return InsertRecord(record);
         }
         public override bool Update(List<object> record)
         {
-            try
-            {
-                int index = 0;
-                connection.Open();
-                query = "UPDATE Medicine " +
-                    "SET generic_name = @genericName, brand_name = @brandName , price = @price" +
-                    " WHERE med_ID = " + record[index++];
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@genericName", (string)record[index++]);
-                command.Parameters.AddWithValue("@brandName", (string)record[index++]);
-                command.Parameters.Add("@price", SqlDbType.Decimal, 18);
-
-                command.Parameters["@price"].Precision = 5;
-                command.Parameters["@price"].Scale = 2;
-                command.Parameters["@price"].Value = (decimal)record[index++];
-                command.ExecuteNonQuery();
-                return true;
-            }
-            catch (SqlException exception)
-            {
-                MessageBox.Show(exception.Message);
-                return false;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            int id = (int)record[0];
+            return UpdateRecordByID(record, id);
         }
 
         public override SqlDataAdapter Search()
         {
-
-            connection.Open();
-            query = "SELECT * FROM Medicine WHERE med_ID = @id";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@id", searchTextBox.Text);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            connection.Close();
-            return adapter;
+            int id = int.Parse(searchTextBox.Text);
+            return SearchRecordByID(id);
         }
 
         private void Form2_Load(object sender, EventArgs e)

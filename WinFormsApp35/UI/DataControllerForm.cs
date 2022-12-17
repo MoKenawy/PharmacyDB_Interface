@@ -111,8 +111,15 @@ namespace WinFormsApp35.DataForms
             DataTable dt = new DataTable();
 
             dataAdapter = dataEntryForm.Search();
-            dataAdapter.Fill(dt);
-            return dt;
+            if (dataAdapter != null)
+            {
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            else
+                MessageBox.Show("Nothing Found");
+            return null;
+
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
