@@ -29,6 +29,9 @@ namespace WinFormsApp35.Utilities
                 case "Manufacturer":
                     return new ManufacturerForm(connection);
 
+                case "Orders":
+                    return new OrdersForm(connection);
+
                 default:
                     return new defaultForm();
 
